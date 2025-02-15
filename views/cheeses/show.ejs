@@ -17,7 +17,9 @@
             <% }; %>
             <form action="/cheeses/<%=cheese._id%>?_method=DELETE" method="POST">
                 <button type="submit">Delete <%= cheese.name %></button>
+                <a href="/cheeses/<%= cheese._id %>/edit">Edit <%= cheese.name %></a>
               </form>
+              
 
   </body>
 </html>
