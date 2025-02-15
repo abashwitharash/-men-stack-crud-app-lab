@@ -6,14 +6,16 @@
     <title>Create a Cheese</title>
   </head>
   <body>
-    <h1>Create a New Fruit!</h1>
-    <form action="/fruits" method="POST">
+<a href="/cheeses/">Back to Cheeses</a>
+
+    <h1>Create a New Cheese!</h1>
+    <form action="/cheeses" method="POST">
+        <div>
       <label for="name">Name:</label>
       <input type="text" name="name" id="name" />
-  
-      <label for="isReadyToEat">Ready to Eat?</label>
-      <input type="checkbox" name="isReadyToEat" id="isReadyToEat" />
-  
+      </div>
+      <label for="isStinky">Is Stinky?</label>
+      <input type="checkbox" name="isStinky" id="isStinky" />
       <button type="submit">Add Cheese</button>
     </form>
   </body>
