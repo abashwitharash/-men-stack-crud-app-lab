@@ -6,15 +6,16 @@
     <title>Cheese Index</title>
   </head>
 
-<body>
-<a href="/cheeses/new">Add New Cheese</a>
-    <h1>All 🧀Cheese🧀</h1>
+  <body>
+    <a href="/cheeses/new">Add New Cheese</a>
+    <h1>All Cheeses</h1>
     <ul>
-      <% cheeses.forEach(cheese => { %>
-        <li><%= cheese.name %></li>
-      <% }); %>
-    </ul>
-  </body>
-  
+        <% cheeses.forEach(cheese => { %>
+            <li>
+            <a href="/cheeses/<%= cheese._id %>"> <%= cheese.name %> </a>
+            </li>
+        <% }); %>
+      </ul>
+    </body>
   
 </html>

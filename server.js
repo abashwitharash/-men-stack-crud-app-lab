@@ -2,7 +2,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 const express = require("express");
 const mongoose = require("mongoose");
-
+const methodOverride = require("method-override");
+const morgan = require("morgan");
 const app = express();
 
 mongoose.connect(process.env.MONGODB_URI);
@@ -16,6 +17,8 @@ const Cheese = require("./models/cheese");
 
 // middleware 
 app.use(express.urlencoded({ extended: false }));
+app.use(methodOverride("_method")); 
+app.use(morgan("dev")); 
 
 
 
@@ -23,15 +26,22 @@ app.use(express.urlencoded({ extended: false }));
 app.get("/", async (req, res) => {
     res.render("index.ejs");
   });
-  
+
+  app.get("/cheeses", async (req, res) => {
+    const allCheeses = await Cheese.find();
+  res.render("cheeses/index.ejs", { cheeses: allCheeses});
+});
+ 
 app.get("/cheeses/new", (req, res)=> {
     res.render("cheeses/new.ejs");
 });
 
-app.get("/cheeses", async (req, res) => {
-    const allCheeses = await Cheese.find();
-  res.render("cheeses/index.ejs", { cheeses: allCheeses});
+app.get('/cheeses/:cheeseId', async (req, res) => {
+ const foundCheese = await Cheese.findById(req.params.cheeseId);
+ res.render("cheeses/show.ejs", { cheese: foundCheese});
 });
+
+
 
 
 
@@ -49,6 +59,11 @@ app.post("/cheeses", async (req, res) => {
 });
 
 
+//delete route 
+app.delete("/cheeses/:cheeseId", async (req, res) => {
+  await Cheese.findByIdAndDelete(req.params.cheeseId);
+  res.redirect("/cheeses");
+});
 
 
 
